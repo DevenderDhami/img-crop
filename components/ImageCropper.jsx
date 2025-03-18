@@ -23,11 +23,19 @@ export default function ImageCropper() {
     const file = acceptedFiles[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => setImage(reader.result);
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          setWidth(img.naturalWidth);
+          setHeight(img.naturalHeight);
+        };
+        img.src = reader.result;
+        setImage(reader.result);
+      };
       reader.readAsDataURL(file);
     }
   }, []);
-
+  
   const handleCrop = () => {
     if (cropperRef.current) {
       const canvas = cropperRef.current.cropper.getCroppedCanvas({
