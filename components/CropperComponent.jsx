@@ -33,7 +33,7 @@ export default function CropperComponent({ image, cropperRef, aspectRatio, setWi
       viewMode={1}
       guides={true}
       background={false}
-      autoCropArea={1}
+      autoCropArea={0.4}
       responsive={true}
       checkOrientation={false}
       zoomOnWheel={false}
