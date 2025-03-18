@@ -1,10 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 export default function CroppedImagePreview({ croppedImage, format, handleDownload, isOpen, onClose }) {
   const [imageSize, setImageSize] = useState({ width: "auto", height: "auto" });
 
-  // Get actual image dimensions
   useEffect(() => {
     if (croppedImage) {
       const img = new window.Image();
@@ -30,8 +29,8 @@ export default function CroppedImagePreview({ croppedImage, format, handleDownlo
           <div className="fixed inset-0 bg-black bg-opacity-50" />
         </Transition.Child>
 
-        <div className="fixed inset-0 flex items-center justify-center">
-          <Dialog.Panel className="w-full max-w-2xl bg-white p-5 rounded-lg shadow-xl">
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <Dialog.Panel className="w-full max-w-3xl bg-white p-5 rounded-lg shadow-xl max-h-[90vh] overflow-auto">
             <Dialog.Title className="text-lg font-bold">Cropped Image</Dialog.Title>
 
             <div className="mt-2 flex justify-center">
@@ -40,6 +39,7 @@ export default function CroppedImagePreview({ croppedImage, format, handleDownlo
                 alt="Cropped"
                 style={{
                   maxWidth: "100%",
+                  maxHeight: "70vh", // Prevents overflow
                   height: "auto",
                   borderRadius: "8px",
                   boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",

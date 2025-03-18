@@ -7,10 +7,6 @@ export default function SettingsPanel({
   setHeight,
   unit,
   setUnit,
-  brightness,
-  setBrightness,
-  contrast,
-  setContrast,
   format,
   setFormat,
   handleCrop,
@@ -67,30 +63,6 @@ export default function SettingsPanel({
             <option value="cm">Centimeters (cm)</option>
           </select>
         </div>
-      </div>
-
-      {/* Brightness & Contrast Sliders */}
-      <div className="mt-4">
-        <label className="block font-semibold">Brightness:</label>
-        <input
-          type="range"
-          min="50"
-          max="150"
-          value={brightness}
-          onChange={(e) => setBrightness(e.target.value)}
-          className="w-full"
-        />
-      </div>
-      <div className="mt-2">
-        <label className="block font-semibold">Contrast:</label>
-        <input
-          type="range"
-          min="50"
-          max="150"
-          value={contrast}
-          onChange={(e) => setContrast(e.target.value)}
-          className="w-full"
-        />
       </div>
 
       {/* Format Selection */}
