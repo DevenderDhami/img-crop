@@ -30,10 +30,10 @@ export default function ImageCropper() {
         img.src = reader.result;
         setImage(reader.result);
 
-        const fileFormat = file.type.split("/")[1]; 
+        const fileFormat = file.type.split("/")[1];
         const fileName = file.name.split(".").slice(0, -1).join(".");
         setFormat(fileFormat || "png");
-        setUploadedFileName(fileName); 
+        setUploadedFileName(fileName);
       };
       reader.readAsDataURL(file);
     }
@@ -43,7 +43,7 @@ export default function ImageCropper() {
     if (croppedImage) {
       const link = document.createElement("a");
       link.href = croppedImage;
-      link.download = `${uploadedFileName}.${format}`; 
+      link.download = `${uploadedFileName}.${format}`;
       link.click();
     }
   };
@@ -79,8 +79,9 @@ export default function ImageCropper() {
         <>
           <div className="flex flex-col md:flex-row gap-3 px-10">
             <CropperComponent
-              {...{ image, cropperRef, aspectRatio }}
+              {...{ image, cropperRef, aspectRatio, setWidth, setHeight }}
             />
+
             <SettingsPanel
               {...{
                 aspectRatio,
