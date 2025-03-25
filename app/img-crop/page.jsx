@@ -1,4 +1,4 @@
-import ImageCropper from '@/components/ImageCropper'
+import ImageCropper from '@/components/image-cropper/ImageCropper'
 import React from 'react'
 
 const ImageCropPage = () => {
