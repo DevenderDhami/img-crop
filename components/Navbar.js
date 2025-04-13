@@ -53,24 +53,25 @@ const Navbar = () => {
         onLoaderFinished={() => setProgress(0)}
       />
             <div className="container mx-auto flex justify-between items-center">
-                <Link href={"/blogs"}><div className="text-lg font-bold">
+                <Link href={"/blogs/home"}><div className="text-lg font-bold">
                     Tech Keeda
-                </div></Link>
+                </div>
+                </Link>
                 <div className="hidden md:flex space-x-4 items-center">
-                    <Link href="/blogs" className="hover:scale-105 hover:font-semibold transition-transform duration-300"> Home
-                    </Link>
+                    {/* <Link href="/blogs" className="hover:scale-105 hover:font-semibold transition-transform duration-300"> Home
+                    </Link> */}
                     <Link href="/blogs/about" className="hover:scale-105 hover:font-semibold transition-transform duration-300">
                         About
                     </Link>
-                    <Link href="/blogs/blog" className="hover:scale-105 hover:font-semibold transition-transform duration-300">
-                        Blog
+                    <Link href="/blogs" className="hover:scale-105 hover:font-semibold transition-transform duration-300">
+                        Blogs
                     </Link>
                     <Link href="/blogs/contact" className="hover:scale-105 hover:font-semibold transition-transform duration-300">
                         Contact
                     </Link>
                     <div className='flex items-center'>
-                        <Button className="mx-1" variant="outline">Login</Button>
-                        <Button className="mx-1" variant="outline">Signup</Button>
+                        {/* <Button className="mx-1" variant="outline">Login</Button>
+                        <Button className="mx-1" variant="outline">Signup</Button> */}
                         <ModeToggle />
                     </div>
                 </div>
@@ -90,22 +91,22 @@ const Navbar = () => {
                                 <SheetTitle className="font-bold my-4">Tech Keeda</SheetTitle>
                                 <SheetDescription>
                                     <div className="flex flex-col gap-6">
-                                        <Link href="/blogs"> Home
+                                        <Link href="/blogs/home"> Home
                                         </Link>
                                         <Link href="/blogs/about">
                                             About
                                         </Link>
-                                        <Link href="/blogs/blog">
-                                            Blog
+                                        <Link href="/blogs">
+                                            Blogs
                                         </Link>
                                         <Link href="/blogs/contact">
                                             Contact
                                         </Link>
-                                        <div>
+                                        {/* <div>
                                             <Button className="mx-1 text-xs" variant="outline">Login</Button>
                                             <Button className="mx-1 text-xs" variant="outline">Signup</Button>
 
-                                        </div>
+                                        </div> */}
 
                                     </div>
                                 </SheetDescription>

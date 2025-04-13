@@ -22,7 +22,7 @@ export default function NotFound() {
         </p>
 
         <Link
-          href="/"
+          href="/blogs"
           className="inline-flex items-center gap-2 px-4 py-2 bg-themeGreen dark:bg-blue-600 hover:bg-themeBrown dark:hover:bg-blue-700 transition rounded-full text-white"
         >
           <FiArrowLeft size={18} />
