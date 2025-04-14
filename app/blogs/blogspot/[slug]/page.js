@@ -14,10 +14,12 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 
 export default async function Page({ params }) {
-
-    const filepath = `content/${params.slug}.md`
     
-    if(!fs.existsSync(filepath)){ 
+    const dirContent = fs.readdirSync("content", "utf-8")
+    console.log(dirContent);
+    
+    const filepath = `content/${params.slug}.md`
+    if(!dirContent.includes(`${params.slug}.md`)){ 
         notFound() 
         return 
     } 
@@ -41,7 +43,6 @@ export default async function Page({ params }) {
               feedbackDuration: 3_000,
             }),
           ],
-
       })
 
     const htmlContent = (await processor.process(content)).toString()

@@ -1,5 +1,5 @@
 ---
-title: ChatGPT vs. Gemini
+title: ChatGPT vs. Geminiv2
 description: This is JavaScript tutorial and this is for learning JavaScript
 slug: chatgpt-vs-gemini
 date: 08/02/2025
