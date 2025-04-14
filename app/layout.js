@@ -1,14 +1,14 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs';
+// import {
+//   ClerkProvider,
+//   SignInButton,
+//   SignUpButton,
+//   SignedIn,
+//   SignedOut,
+//   UserButton,
+// } from '@clerk/nextjs';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +19,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API} // Add the publishableKey here
-    >
+    // <ClerkProvider
+    //   publishableKey={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API} // Add the publishableKey here
+    // >
       <html lang="en" className="scroll-p-20 scroll-smooth">
         <body className={inter.className}>
           <ThemeProvider
@@ -34,6 +34,6 @@ export default function RootLayout({ children }) {
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
+    // </ClerkProvider>
   );
 }
