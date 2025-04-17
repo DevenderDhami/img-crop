@@ -22,7 +22,8 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-  const filepath = path.join(process.cwd(), 'content', `${params.slug}.md`)
+  const {slug} =  await params
+  const filepath = path.join(process.cwd(), 'content', `${slug}.md`)
 
   if (!fs.existsSync(filepath)) {
     notFound()
