@@ -9,7 +9,7 @@ export const navmenu=[
     },
     {
         title:"About us",
-        link:"/about-us"
+        link:"/about"
     },
     {
         title:"",

@@ -18,7 +18,7 @@ export default function About() {
               </div>
             </div>
             <div className="w-full md:w-2/3 flex flex-col justify-center">
-              <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">About Tech Keeda {process.env.MONGO_URI}</h1>
+              <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">About Tech Keeda</h1>
               <p className="text-gray-600 dark:text-gray-50 text-lg mb-4">
                 Welcome to <strong>Tech Keeda</strong> — your go-to platform for everything tech. Whether you’re a developer, enthusiast, or just someone who loves staying updated, we’ve got you covered.
               </p>
