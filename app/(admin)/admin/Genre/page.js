@@ -13,7 +13,7 @@ const Page = async () => {
   const user = await currentUser()
 
   // Use `user` to render user details or create UI elements
-  return <div>Welcome, {user.firstName}!</div>
+  return <div>Genre, {user.firstName}!</div>
 };
 
 export default Page;

@@ -1,4 +1,3 @@
-// app/api/categories/route.js
 import connectDB from '@/lib/middleware/mongoose';
 import Category from '@/models/Category';
 

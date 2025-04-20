@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 export const metadata = {
@@ -8,12 +7,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <div className="min-h-screen bg-red-200">
-        <Navbar/>
-        <div className="flex">
-        <Sidebar/>
-        {children}
-        </div>
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 p-6 bg-gray-100 min-h-screen">{children}</main>
     </div>
   );
 }
