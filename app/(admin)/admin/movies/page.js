@@ -1,69 +1,145 @@
-'use client';
+'use client'
+import React, { useState } from 'react'
+import useMovieStore from '@/store/movieStore'
 
-import { useEffect, useState } from 'react';
+const MoviesPage = () => {
+  const {
+    movies,
+    addMovie,
+    searchQuery,
+    setSearchQuery
+  } = useMovieStore()
 
-export default function CategoriesPage() {
-  const [name, setName] = useState('');
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [showDialog, setShowDialog] = useState(false)
+  const [newMovie, setNewMovie] = useState({
+    title: '',
+    description: '',
+    releaseDate: '',
+    genres: '',
+    language: '',
+    duration: '',
+    posterUrl: '',
+    trailerUrl: '',
+    cast: '',
+    director: '',
+    averageRating: '',
+  })
 
-  const fetchCategories = async () => {
-    const res = await fetch('/api/categories');
-    const data = await res.json();
-    setCategories(data);
-  };
+  const handleChange = (e) => {
+    setNewMovie({ ...newMovie, [e.target.name]: e.target.value })
+  }
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const res = await fetch('/api/categories', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name }),
-    });
-
-    if (res.ok) {
-      setName('');
-      fetchCategories();
-    } else {
-      const { error } = await res.json();
-      alert(error);
+  const handleAddMovie = () => {
+    const movieToAdd = {
+      ...newMovie,
+      genres: newMovie.genres.split(',').map((g) => g.trim()),
+      cast: newMovie.cast.split(',').map((c) => c.trim()),
+      duration: parseInt(newMovie.duration),
+      averageRating: parseFloat(newMovie.averageRating),
     }
 
-    setLoading(false);
-  };
+    addMovie(movieToAdd)
+    setShowDialog(false)
+    setNewMovie({
+      title: '',
+      description: '',
+      releaseDate: '',
+      genres: '',
+      language: '',
+      duration: '',
+      posterUrl: '',
+      trailerUrl: '',
+      cast: '',
+      director: '',
+      averageRating: '',
+    })
+  }
+
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Movie Categories</h1>
-      <form onSubmit={handleSubmit} className="mb-6 flex gap-2">
-        <input
-          type="text"
-          placeholder="Category name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="border px-3 py-2 flex-1"
-          required
-        />
-        <button type="submit" className="px-4 py-2 rounded">
-          {loading ? 'Adding...' : 'Add'}
-        </button>
-      </form>
+    <div className="p-4">
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-bold">🎬 All Movies</h1>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Search movies..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-2 py-1 border rounded"
+          />
+          <button
+            className="border dark:bg-gray-800 px-6 py-1 rounded"
+            onClick={() => setShowDialog(true)}
+          >
+            Add Movie
+          </button>
+        </div>
+      </div>
 
-      <ul className="space-y-2">
-        {categories.map((cat) => (
-          <li key={cat._id} className="border p-2 rounded">
-            {cat.name}
-          </li>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredMovies.map((movie) => (
+          <div key={movie._id} className="p-4 border rounded shadow">
+            <h2 className="text-lg font-semibold">{movie.title}</h2>
+            <p className="text-sm text-gray-500">
+              Genres: {movie.genres.join(', ')}
+            </p>
+            <p className="text-sm text-gray-500">Language: {movie.language}</p>
+          </div>
         ))}
-      </ul>
+      </div>
+
+      {showDialog && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+          <div className="p-6 rounded-lg shadow-lg w-full max-w-lg">
+            <h2 className="text-xl font-bold mb-4">Add New Movie</h2>
+            <div className="grid grid-cols-1 gap-2">
+              {[
+                'title',
+                'description',
+                'releaseDate',
+                'genres',
+                'language',
+                'duration',
+                'posterUrl',
+                'trailerUrl',
+                'cast',
+                'director',
+                'averageRating',
+              ].map((field) => (
+                <input
+                  key={field}
+                  type="text"
+                  name={field}
+                  value={newMovie[field]}
+                  onChange={handleChange}
+                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                  className="border p-2 rounded"
+                />
+              ))}
+              <div className="flex justify-end gap-2 mt-4">
+                <button
+                  onClick={() => setShowDialog(false)}
+                  className="px-4 py-2 rounded border"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleAddMovie}
+                  className="border dark:bg-gray-800 px-6 py-2 rounded"
+                >
+                  Add Movie
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  );
+  )
 }
+
+export default MoviesPage

@@ -17,7 +17,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 h-screen bg-gray-900 text-white flex flex-col">
+    <div className="w-64 h-screen flex flex-col">
       <div className="p-4 text-xl font-bold border-b border-gray-700">
         🎬 Movie Admin
       </div>

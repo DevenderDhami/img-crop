@@ -1,69 +1,83 @@
-'use client';
+'use client'
+import React, { useState } from 'react'
+import useCategoryStore from '@/store/categoryStore'
 
-import { useEffect, useState } from 'react';
+const CategoriesPage = () => {
+  const { categories, addCategory, search, setSearch } = useCategoryStore()
+  const [name, setName] = useState('')
+  const [showDialog, setShowDialog] = useState(false)
 
-export default function CategoriesPage() {
-  const [name, setName] = useState('');
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const filtered = categories.filter((c) =>
+    c.toLowerCase().includes(search.toLowerCase())
+  )
 
-  const fetchCategories = async () => {
-    const res = await fetch('/api/categories');
-    const data = await res.json();
-    setCategories(data);
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const res = await fetch('/api/categories', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name }),
-    });
-
-    if (res.ok) {
-      setName('');
-      fetchCategories();
-    } else {
-      const { error } = await res.json();
-      alert(error);
+  const handleAdd = () => {
+    if (name) {
+      addCategory(name)
+      setName('')
+      setShowDialog(false)
     }
-
-    setLoading(false);
-  };
+  }
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Movie Categories</h1>
-      <form onSubmit={handleSubmit} className="mb-6 flex gap-2">
-        <input
-          type="text"
-          placeholder="Category name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="border px-3 py-2 flex-1"
-          required
-        />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-          {loading ? 'Adding...' : 'Add'}
-        </button>
-      </form>
+    <div className="p-4">
+      <div className="flex justify-between mb-4">
+        <h1 className="text-2xl font-bold">📂 Categories</h1>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border px-2 py-1 rounded"
+          />
+          <button
+            className="dark:bg-gray-800 px-6 py-1 rounded"
+            onClick={() => setShowDialog(true)}
+          >
+            Add
+          </button>
+        </div>
+      </div>
 
       <ul className="space-y-2">
-        {categories.map((cat) => (
-          <li key={cat._id} className="border p-2 rounded">
-            {cat.name}
+        {filtered.map((category, idx) => (
+          <li key={idx} className="border p-2 rounded">
+            {category}
           </li>
         ))}
       </ul>
+
+      {showDialog && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="p-6 rounded w-full max-w-md">
+            <h2 className="text-xl mb-4 font-bold">Add Category</h2>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Category Name"
+              className="w-full border p-2 rounded mb-4"
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                className="border px-4 py-1 rounded"
+                onClick={() => setShowDialog(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="border dark:bg-gray-800 px-6 py-1 rounded"
+                onClick={handleAdd}
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  );
+  )
 }
+
+export default CategoriesPage
