@@ -1,23 +1,28 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useCategoryStore from '@/store/categoryStore'
 
 const CategoriesPage = () => {
-  const { categories, addCategory, search, setSearch } = useCategoryStore()
+  const { categories, addCategory, search, setSearch, getCategory } = useCategoryStore()
   const [name, setName] = useState('')
   const [showDialog, setShowDialog] = useState(false)
 
   const filtered = categories.filter((c) =>
-    c.toLowerCase().includes(search.toLowerCase())
+    c.name.toLowerCase().includes(search.toLowerCase())
   )
+  
 
   const handleAdd = () => {
     if (name) {
       addCategory(name)
+      getCategory()
       setName('')
       setShowDialog(false)
     }
   }
+  useEffect(()=>{
+    getCategory()
+  },[])
 
   return (
     <div className="p-4">
@@ -42,8 +47,8 @@ const CategoriesPage = () => {
 
       <ul className="space-y-2">
         {filtered.map((category, idx) => (
-          <li key={idx} className="border p-2 rounded">
-            {category}
+          <li key={category._id} className="border p-2 rounded">
+            {category.name}
           </li>
         ))}
       </ul>

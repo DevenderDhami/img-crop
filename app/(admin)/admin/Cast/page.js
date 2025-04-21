@@ -3,17 +3,18 @@ import React, { useState } from 'react'
 import useCastStore from '@/store/castStore'
 
 const CastPage = () => {
-  const { cast, addCast, search, setSearch } = useCastStore()
+  const { cast, addCast, search, setSearch, getCast } = useCastStore()
   const [name, setName] = useState('')
   const [showDialog, setShowDialog] = useState(false)
 
   const filtered = cast.filter((c) =>
-    c.toLowerCase().includes(search.toLowerCase())
+    c.name.toLowerCase().includes(search.toLowerCase())
   )
 
   const handleAdd = () => {
     if (name) {
       addCast(name)
+      getCast()
       setName('')
       setShowDialog(false)
     }
@@ -43,7 +44,7 @@ const CastPage = () => {
       <ul className="space-y-2">
         {filtered.map((member, idx) => (
           <li key={idx} className="border p-2 rounded">
-            {member}
+            {member.name}
           </li>
         ))}
       </ul>
