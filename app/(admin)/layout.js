@@ -3,6 +3,8 @@ import Sidebar from "./Sidebar";
 import NProgress from 'nprogress'
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import darkTheme from "./theme";
 // import { useRouter } from 'next/router'
 
 // export const metadata = {
@@ -30,9 +32,12 @@ export default function RootLayout({ children }) {
     }
   }, [pathname])
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-6 min-h-screen">{children}</main>
-    </div>
+    <ThemeProvider theme={darkTheme}>  {/* Apply dark theme globally */}
+      <CssBaseline /> {/* Apply baseline styles for consistency */}
+      <div className="flex">
+        <Sidebar />
+        <main className="flex-1 p-6 min-h-screen">{children}</main>
+      </div>
+    </ThemeProvider>
   );
 }

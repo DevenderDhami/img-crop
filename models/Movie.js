@@ -1,18 +1,19 @@
+// models/Movie.js
 import mongoose from 'mongoose';
 
 const movieSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+  title: String,
   description: String,
   releaseDate: Date,
-  genres: [String], 
-  language: String, 
-  duration: Number, 
+  genres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }],
+  language: String,
+  duration: Number,
   posterUrl: String,
   trailerUrl: String,
-  cast: [String], 
+  cast: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cast' }],
   director: String,
-  averageRating: { type: Number, default: 0 },
-  createdAt: { type: Date, default: Date.now },
+  averageRating: Number,
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }, 
 });
 
 export default mongoose.models.Movie || mongoose.model('Movie', movieSchema);

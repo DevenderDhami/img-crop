@@ -1,23 +1,28 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useGenreStore from '@/store/genreStore'
 
 const GenresPage = () => {
-  const { genres, addGenre, search, setSearch } = useGenreStore()
+  const { genres, addGenre, search, setSearch,getGenre } = useGenreStore()
   const [name, setName] = useState('')
   const [showDialog, setShowDialog] = useState(false)
 
   const filtered = genres.filter((g) =>
-    g.toLowerCase().includes(search.toLowerCase())
+    g.name.toLowerCase().includes(search.toLowerCase())
   )
 
   const handleAdd = () => {
     if (name) {
       addGenre(name)
+      getGenre()
       setName('')
       setShowDialog(false)
     }
   }
+
+  useEffect(()=>{
+    getGenre()
+  },[])
 
   return (
     <div className="p-4">
@@ -43,7 +48,7 @@ const GenresPage = () => {
       <ul className="space-y-2">
         {filtered.map((genre, idx) => (
           <li key={idx} className="border p-2 rounded">
-            {genre}
+            {genre.name}
           </li>
         ))}
       </ul>

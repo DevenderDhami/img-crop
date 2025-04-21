@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useCastStore from '@/store/castStore'
 
 const CastPage = () => {
@@ -19,6 +19,11 @@ const CastPage = () => {
       setShowDialog(false)
     }
   }
+
+  useEffect(() => {
+    getCast()
+  }, [])
+  
 
   return (
     <div className="p-4">
