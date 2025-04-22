@@ -1,5 +1,6 @@
 import connectDB from '@/lib/middleware/mongoose';
 import Movie from '@/models/Movie';
+import { auth } from '@clerk/nextjs/server'
 
 export async function GET(req) {
   await connectDB();
@@ -19,6 +20,11 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
+  const { userId } = await auth()
+  
+  if (!userId) {
+    return new Response('Unauthorized', { status: 401 })
+  }
   await connectDB();
   const body = await req.json();
 

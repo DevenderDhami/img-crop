@@ -1,8 +1,14 @@
 // app/api/genre/route.js
 import connectDB from '@/lib/middleware/mongoose';
 import Genre from '@/models/Genre';
+import { auth } from '@clerk/nextjs/server'
 
 export async function GET() {
+  const { userId } = await auth()
+  
+    if (!userId) {
+      return new Response('Unauthorized', { status: 401 })
+    }
   await connectDB();
   try {
     const genres = await Genre.find();
@@ -13,6 +19,11 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const { userId } = await auth()
+  
+    if (!userId) {
+      return new Response('Unauthorized', { status: 401 })
+    }
   await connectDB();
 
   try {
