@@ -1,6 +1,7 @@
 // app/page.tsx (or app/home/page.tsx if you're nesting)
 import React from 'react'
 import axios from 'axios'
+import Link from 'next/link'
 
 export const revalidate = 3600 // ⏰ Revalidate every 1 hour
 
@@ -16,7 +17,7 @@ const HomePage = async () => {
     <main className="p-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {movies.map((movie) => (
-          <div key={movie._id} className="rounded-lg shadow-md overflow-hidden">
+          <Link href={`/movie/${movie?._id}`} key={movie._id} className="rounded-lg shadow-md overflow-hidden border hover:cursor-pointer">
             <img
               src={movie.posterUrl}
               alt={movie.title}
@@ -28,7 +29,7 @@ const HomePage = async () => {
               <p className="text-xs text-gray-500 mt-1">📅 {new Date(movie.releaseDate).toLocaleDateString()}</p>
               <p className="text-xs text-gray-500">🕒 {movie.duration} mins</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </main>
