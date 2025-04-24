@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FiArrowLeft, FiFilm } from 'react-icons/fi'
-import Navbar from '@/components/movie/lib/Navbar'
+import Navbar from '@/components/movie/Navbar'
 
 export default function NotFound() {
   return (

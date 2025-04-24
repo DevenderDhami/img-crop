@@ -13,10 +13,10 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const navmenu = [
-    { title: 'Movies', link: '/movies' },
-    { title: 'Genres', link: '/genres' },
+    { title: 'Anime', link: '/movies' },
+    { title: 'Hollywood', link: '/genres' },
     { title: 'Web Series', link: '/web-series' },
-    { title: 'TV Shows', link: '/tv-shows' },
+    { title: 'Bollywood', link: '/tv-shows' },
   ]
 
   // Auto-close sidebar on md and up

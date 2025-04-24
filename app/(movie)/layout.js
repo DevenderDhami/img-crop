@@ -1,4 +1,4 @@
-import Navbar from "@/components/movie/lib/Navbar";
+import Navbar from "@/components/movie/Navbar";
 
 export const metadata = {
   title: "Film Wale",
