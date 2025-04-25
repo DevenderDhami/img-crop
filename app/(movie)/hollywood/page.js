@@ -1,9 +1,46 @@
 import React from 'react'
+import axios from 'axios'
+import Link from 'next/link'
 
-const page = () => {
+export const revalidate = 3600
+
+const getMovies = async () => {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/movies`)
+  return res.data
+}
+
+const HomePage = async () => {
+  const movies = await getMovies()
+  const hollywoodMovies = movies.filter(move=> move.category == "680a6cba945276bd40978e54")
+
   return (
-    <div>Hollywood</div>
+    <main className="p-6 max-w-7xl mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {hollywoodMovies.map((movie) => (
+        <Link
+          href={`/movie/${movie?._id}`}
+          key={movie._id}
+          className="rounded-lg shadow-md overflow-hidden border hover:cursor-pointer"
+        >
+          <img
+            src={movie.posterUrl}
+            alt={movie.title}
+            className="w-full h-56 object-cover"
+          />
+          <div className="p-4">
+            <h2 className="text-xl font-semibold">{movie.title}</h2>
+            <p className="text-sm text-gray-600 line-clamp-2">{movie.description}</p>
+            <p className="text-xs text-gray-500 mt-1">
+              📅 {new Date(movie.releaseDate).toLocaleDateString()}
+            </p>
+            <p className="text-xs text-gray-500">🕒 {movie.duration} mins</p>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </main>
+
   )
 }
 
-export default page
+export default HomePage
