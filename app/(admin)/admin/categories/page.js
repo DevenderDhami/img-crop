@@ -21,6 +21,7 @@ const CategoriesPage = () => {
       setShowDialog(false)
     }
   }
+  
 
   const handleDelete = () => {
     deleteCategory(deleteDialog.id)
