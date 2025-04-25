@@ -1,4 +1,3 @@
-// app/page.tsx (or app/home/page.tsx if you're nesting)
 import React from 'react'
 import axios from 'axios'
 import Link from 'next/link'
@@ -12,11 +11,12 @@ const getMovies = async () => {
 
 const HomePage = async () => {
   const movies = await getMovies()
+  const bollywoodMovies = movies.filter(move=> move.category == "680b2715e021a425fbbc9185")
 
   return (
     <main className="p-6 max-w-7xl mx-auto">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {movies.map((movie) => (
+      {bollywoodMovies.map((movie) => (
         <Link
           href={`/movie/${movie?._id}`}
           key={movie._id}

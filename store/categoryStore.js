@@ -45,11 +45,36 @@ const useCategoryStore = create((set) => ({
     }
   },
   editCategory: async (id) => {
+    const toastId = toast.loading('Deleting category...',{style: {
+      borderRadius: '10px',
+      background: '#333',
+      color: '#fff',
+    },})
     try {
-      const toastId = toast.loading('Deleting category...')
-
+      const res = await axios.put(`/api/category/${id}`)
+      set((state) => ({
+        categories: state.categories.map(category =>
+          category._id === id ? res.data.updatedCategory : category
+        ),
+      }))
+      toast.success('Updated successfully!', {
+        id: toastId,
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      },)
     } catch (error) {
-      
+      toast.error('Failed to update.', {
+        id: toastId,
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff'
+        },
+      })
+      console.error('Error updating', error.response?.data || error.message);
     }
   },
   deleteCategory: async (id) => {

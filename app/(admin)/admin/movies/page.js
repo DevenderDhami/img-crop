@@ -30,7 +30,7 @@ const MoviesPage = () => {
     cast: [],
     director: '',
     averageRating: '',
-    categoryId: '',
+    category: '',
   })
 
   const handleChange = (e) => {
@@ -42,7 +42,7 @@ const MoviesPage = () => {
       ...newMovie,
       genreIds: newMovie.genres,
       castIds: newMovie.cast,
-      categoryId: newMovie.categoryId,
+      category: newMovie.category,
       duration: parseInt(newMovie.duration),
       averageRating: parseFloat(newMovie.averageRating),
     }
@@ -62,7 +62,7 @@ const MoviesPage = () => {
       cast: [],
       director: '',
       averageRating: '',
-      categoryId: '',
+      category: '',
     })
   }
 
@@ -212,8 +212,8 @@ const MoviesPage = () => {
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
               <Select
-                value={newMovie.categoryId}
-                onChange={(e) => setNewMovie({ ...newMovie, categoryId: e.target.value })}
+                value={newMovie.category}
+                onChange={(e) => setNewMovie({ ...newMovie, category: e.target.value })}
                 label="Category"
               >
                 <MenuItem value="">
