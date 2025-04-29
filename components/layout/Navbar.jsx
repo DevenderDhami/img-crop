@@ -24,7 +24,6 @@ const Navbar = () => {
                             href={item.link}
                             className="flex items-center gap-2 hover:font-bold min-w-[70px]"
                         >
-                            {/* <item.icon className="text-xl" /> */}
                             {item.label}
                         </Link>
                     ))}
