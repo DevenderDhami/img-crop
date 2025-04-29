@@ -1,0 +1,1 @@
+export const CMP_NAME ="Cropper"
