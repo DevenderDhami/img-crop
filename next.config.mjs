@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  images: {
-    domains: ['static1.cbrimages.com', 'assets-in.bmscdn.com',"upload.wikimedia.org","https://lh3.googleusercontent.com"],
-  },
-}
+  webpack(config) {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      'cropperjs/dist/cropper.css': 'cropperjs/dist/cropper.min.css'
+    };
+    return config;
+  }
+};
 
 export default nextConfig;

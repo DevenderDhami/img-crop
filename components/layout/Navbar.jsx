@@ -22,14 +22,16 @@ const Navbar = () => {
                         <Link
                             key={item.label}
                             href={item.link}
-                            className="flex items-center gap-2 hover:font-bold min-w-[70px]"
+                            className="flex items-center gap-2 hover:font-bold min-w-[100px]"
                         >
                             {item.label}
                         </Link>
                     ))}
+                </div>
+                <div className="hidden md:flex items-center gap-6">
+
                     <ThemeToggle />
                 </div>
-
                 <div className="md:hidden">
                     <div className="flex flex-row gap-4">
                         <ThemeToggle />
