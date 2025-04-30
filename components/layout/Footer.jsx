@@ -24,27 +24,27 @@ const Footer = () => {
                 </div>
 
                 <div className="flex gap-4">
-                    <a
-                        href="https://facebook.com"
+                    <Link
+                        href="#"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         <FaFacebook className="text-xl hover:text-blue-500 dark:hover:text-blue-400" />
-                    </a>
-                    <a
-                        href="https://twitter.com"
+                    </Link>
+                    <Link
+                        href="#"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         <FaTwitter className="text-xl hover:text-blue-400 dark:hover:text-blue-300" />
-                    </a>
-                    <a
-                        href="https://instagram.com"
+                    </Link>
+                    <Link
+                        href="#"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         <FaInstagram className="text-xl hover:text-pink-500 dark:hover:text-pink-400" />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </footer>
